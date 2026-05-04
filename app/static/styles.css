@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f6f8fb;
+  color: #222;
+}
+
+.topbar {
+  background: #0f2d5c;
+  color: #fff;
+}
+
+.topbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+.brand {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
+.link-button {
+  color: #fff;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  margin-left: 1rem;
+  font: inherit;
+}
+
+.subtle {
+  color: #5a6472;
+  font-size: 0.95rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.hero {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.actions {
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 0.9rem;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn {
+  background: #1f6feb;
+  color: #fff;
+}
+
+.btn.btn-secondary {
+  background: #e7edf6;
+  color: #0f2d5c;
+}
+
+.card {
+  background: #fff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.55rem;
+  margin: 0.3rem 0 0.8rem;
+  border: 1px solid #c7d1e0;
+  border-radius: 4px;
+}
+
+textarea {
+  min-height: 90px;
+}
+
+.error {
+  color: #b00020;
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 1.2rem;
+}
