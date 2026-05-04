@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }} - NUR LMS</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-content">
+        <a href="/" class="brand">NUR Online Learning</a>
+        <nav class="nav">
+          {% if user %}
+          <a href="/dashboard">Dashboard</a>
+          <form action="/logout" method="post">
+            <button type="submit" class="link-button">Logout</button>
+          </form>
+          {% else %}
+          <a href="/login">Login</a>
+          <a href="/register">Register</a>
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+    <main class="container">{% block content %}{% endblock %}</main>
+  </body>
+</html>

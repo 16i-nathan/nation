@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<p class="subtle">Welcome, {{ user.full_name }} ({{ user.role }})</p>
+
+<section class="card">
+  <h3>My Courses</h3>
+  {% if courses %}
+    <ul>
+      {% for course in courses %}
+      <li><strong>{{ course.code }}</strong> - {{ course.title }}<br><span class="subtle">{{ course.description }}</span></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No courses yet.</p>
+  {% endif %}
+</section>
+
+{% if user.role in ["lecturer", "admin"] %}
+<section class="card">
+  <h3>Create Course</h3>
+  <form method="post" action="/courses">
+    <label>Course Code</label>
+    <input type="text" name="code" placeholder="e.g., CSC101" required />
+    <label>Course Title</label>
+    <input type="text" name="title" placeholder="Introduction to Computing" required />
+    <label>Description</label>
+    <textarea name="description" rows="3" placeholder="Course description"></textarea>
+    <button type="submit">Create Course</button>
+  </form>
+</section>
+
+<section class="card">
+  <h3>Create Assignment</h3>
+  {% if manageable_courses %}
+  <form method="post" action="/assignments">
+    <label>Course</label>
+    <select name="course_id" required>
+      {% for course in manageable_courses %}
+      <option value="{{ course.id }}">{{ course.code }} - {{ course.title }}</option>
+      {% endfor %}
+    </select>
+    <label>Title</label>
+    <input type="text" name="title" required />
+    <label>Instructions</label>
+    <textarea name="instructions" rows="4" required></textarea>
+    <label>Due Date (YYYY-MM-DD)</label>
+    <input type="text" name="due_date" placeholder="2026-06-30" required />
+    <button type="submit">Publish Assignment</button>
+  </form>
+  {% else %}
+    <p>Create a course first to add assignments.</p>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if user.role == "student" %}
+<section class="card">
+  <h3>Enroll in Course</h3>
+  {% if available_courses %}
+  <form method="post" action="/courses/enroll">
+    <label>Available Courses</label>
+    <select name="course_id" required>
+      {% for course in available_courses %}
+      <option value="{{ course.id }}">{{ course.code }} - {{ course.title }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Enroll</button>
+  </form>
+  {% else %}
+    <p>You are enrolled in all available courses.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h3>Submit Assignment</h3>
+  {% if assignments %}
+  <form method="post" action="/submissions">
+    <label>Assignment</label>
+    <select name="assignment_id" required>
+      {% for item in assignments %}
+      <option value="{{ item.id }}">{{ item.course_code }} - {{ item.title }} (Due: {{ item.due_date }})</option>
+      {% endfor %}
+    </select>
+    <label>Submission Content</label>
+    <textarea name="content" rows="4" placeholder="Paste your answer or submission link." required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+  {% else %}
+    <p>No assignments have been published yet.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h3>My Recent Submissions</h3>
+  {% if submissions %}
+    <ul>
+      {% for sub in submissions %}
+      <li>{{ sub.course_code }} - {{ sub.title }}<br><span class="subtle">Submitted at {{ sub.submitted_at }}</span></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No submissions yet.</p>
+  {% endif %}
+</section>
+{% endif %}
+
+<section class="card">
+  <h3>Upcoming Assignments</h3>
+  {% if assignments %}
+  <ul>
+    {% for item in assignments %}
+    <li>{{ item.course_code }} - {{ item.title }} <span class="subtle">(Due: {{ item.due_date }})</span></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No assignments available.</p>
+  {% endif %}
+</section>
+{% endblock %}

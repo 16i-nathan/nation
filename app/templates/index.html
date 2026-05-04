@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h2>National University of Rwanda — Online Learning MVP</h2>
+  <p>
+    A starter digital platform for course delivery, enrollment, assignments, and submissions.
+  </p>
+  {% if not user %}
+  <div class="actions">
+    <a class="btn" href="/register">Create account</a>
+    <a class="btn btn-secondary" href="/login">Sign in</a>
+  </div>
+  {% else %}
+  <div class="actions">
+    <a class="btn" href="/dashboard">Go to dashboard</a>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}
